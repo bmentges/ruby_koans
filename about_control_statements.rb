@@ -8,7 +8,7 @@ class AboutControlStatements < EdgeCase::Koan
     else
       result = :false_value
     end
-    assert_equal :true_value, result
+    assert_equal __, result
   end
 
   def test_if_then_statements
@@ -16,7 +16,7 @@ class AboutControlStatements < EdgeCase::Koan
     if true
       result = :true_value
     end
-    assert_equal :true_value, result
+    assert_equal __, result
   end
 
   def test_if_statements_return_values
@@ -25,14 +25,14 @@ class AboutControlStatements < EdgeCase::Koan
             else
               :false_value
             end
-    assert_equal :true_value, value
+    assert_equal __, value
 
     value = if false
               :true_value
             else
               :false_value
             end
-    assert_equal :false_value, value
+    assert_equal __, value
 
     # NOTE: Actually, EVERY statement in Ruby will return a value, not
     # just if statements.

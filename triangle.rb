@@ -14,6 +14,13 @@
 #   about_triangle_project_2.rb
 #
 def triangle(a, b, c)
+
+  args = [a, b, c]
+  zeroes = args.count(0)
+  if zeroes == 3:
+    raise TriangleError.new "Cannot be all zeroes" 
+  end
+
   results = [a == b, a == c, b == c]
 
   if results.count(true) == 3

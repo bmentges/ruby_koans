@@ -29,7 +29,74 @@ require File.expand_path(File.dirname(__FILE__) + '/edgecase')
 #
 # Your goal is to write the score method.
 
+class Greed
+  def initialize(dices)
+    @results = dices
+  end
+
+  def score
+    return 0 if @results.empty?
+    calculate_score
+  end
+
+  def calculate_score
+    resultado = 0
+
+    ones = @results.find_all { |n| n == 1 }
+    twos = @results.find_all { |n| n == 2 }
+    threes = @results.find_all { |n| n == 3 }
+    fours = @results.find_all { |n| n == 4 }
+    fives = @results.find_all { |n| n == 5 }
+    sixes = @results.find_all { |n| n == 6 }
+
+    all_sets = [ones, twos, threes, fours, fives, sixes]
+
+    all_sets.each do |s|
+      if s.count >= 3
+        resultado += calculate_score_when_more_than_three s
+      end
+
+      if s[0] == 1 and s.count < 3
+        resultado += s.count * 100
+      end
+
+      if s[0] == 5 and s.count < 3
+        resultado += s.count * 50
+      end
+    end
+    
+   resultado 
+  end
+
+  def calculate_score_when_more_than_three numbers
+    resultado = 0
+    if numbers[0] == 1
+      resultado += (numbers.count / 3) * 1000
+      if numbers.count % 3 != 0
+        resultado += (numbers.count % 3) * 100
+      end
+    end
+
+    if [2,3,4,6].find { |n| n == numbers[0] } != nil
+      resultado += (numbers.count / 3) * (numbers[0] * 100)
+    end
+
+    if numbers[0] == 5
+      resultado += (numbers.count / 3) * 500
+      if numbers.count % 3 != 0
+        resultado += (numbers.count % 3) * 50
+      end
+    end
+
+    resultado
+  end
+
+
+end
+
 def score(dice)
+  game = Greed.new(dice)
+  game.score
   # You need to write this method
 end
 
